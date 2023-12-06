@@ -12,4 +12,4 @@ python:
     - pydantic
     - pandas
 models: # The model to be used for building the Bento.
-- iris_clf:latest
+- my_xgboost_model:oilt7uesnosisbwi
