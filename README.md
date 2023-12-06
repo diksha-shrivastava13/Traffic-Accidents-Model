@@ -7,7 +7,7 @@ Welcome to the repository for the Digital Product School's AI Engineering Challe
 The model has been deployed on Heroku using BentoML, and the Streamlit app is hosted on Streamlit Cloud.
 
 - **Endpoint**: [Accidents App on Heroku](https://accidents-app-8b4af04b640b.herokuapp.com/) (Note: It might crash due to memory usage)
-- **Streamlit Cloud**: [Streamlit Cloud](https://streamlit.io/cloud)
+- **Streamlit Cloud**: [Streamlit App](https://traffic-accidents-model-e7jx75wyvsizp7pchcmbrb.streamlit.app/)
 
 Additionally, the Docker image is available on Docker Hub at [dikshashrivastava13/accidents](https://hub.docker.com/repository/docker/dikshashrivastava13/accidents/general).
 
