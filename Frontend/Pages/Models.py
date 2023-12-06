@@ -40,7 +40,7 @@ def visualize_images(image_folder):
         st.image(image_path, caption=image_descriptions[i-1], use_column_width=True)
 
 
-images_folder = """/Users/DELL/PycharmProjects/Traffic-Accidents-Model/Frontend/models"""
+images_folder = """../Frontend/models"""
 
 # Run the app
 if __name__ == "__main__":
