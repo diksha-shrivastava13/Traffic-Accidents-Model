@@ -50,7 +50,7 @@ The models were trained on Kaggle Notebooks, and you can find the Jupyter Notebo
 
 Here is a plot depicting the historical trend of different categories of accidents:
 
-![Historical Trend]("Frontend/Visualisations/line_plt_each_cat.png")
+![](Frontend/Visualisations/line_plt_each_cat.png)
 
 ## Models Explored
 
@@ -73,6 +73,6 @@ Feel free to explore the models in the respective directories and notebooks.
 
 Thank you for visiting the repository!
 
-![Endpoint]("image1.png")
-![Endpoint]("image2.png")
-![Endpoint]("image3.png")
+![](image1.png)
+![](image2.png)
+![](image3.png)
