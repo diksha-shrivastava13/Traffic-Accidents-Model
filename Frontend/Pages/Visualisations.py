@@ -22,7 +22,8 @@ def visualize_images(image_folder):
         "Image 9: Accidents Comparison of Current vs Previous Year."
     ]
 
-    image_files = os.listdir(image_folder)
+    # image_files = os.listdir(image_folder)
+    image_files = sorted(os.listdir(image_folder))
 
     # Display each image and its description
     for i, image_file in enumerate(image_files, start=1):
