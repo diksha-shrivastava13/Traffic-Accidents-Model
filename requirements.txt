@@ -6,3 +6,4 @@ timedelta
 bentoml # Replace VERSION with the actual version you are using
 xgboost
 pydantic
+scikit-learn
