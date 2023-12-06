@@ -38,5 +38,5 @@ def encode_types(type_: str, lst: List[int]) -> List[int]:
 
     del lst[2]
     del lst[2]
-    return lst
+    return [lst]
 
