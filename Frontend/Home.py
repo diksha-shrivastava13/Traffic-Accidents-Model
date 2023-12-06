@@ -1,27 +1,46 @@
 import streamlit as st
 import requests
 import pandas as pd
-import plotly.express as px
+# import plotly.express as px
 from datetime import datetime, timedelta
+from model_handler import make_local_request
 
-# Define API endpoint
-API_ENDPOINT = "https://your-api-endpoint"
-
-
-# Function to make API requests
-def make_api_request(data):
-    response = requests.post(API_ENDPOINT, json=data)
-    if response.status_code == 200:
-        return response.json()
-    else:
-        st.error(f"Failed to make API request. Status code: {response.status_code}")
-        return None
+# # Define API endpoint
+# API_ENDPOINT = "https://accidents-app-8b4af04b640b.herokuapp.com/accidents-regression"
+#
+#
+# # Function to make API requests
+# def make_api_request(data):
+#     response = requests.post(API_ENDPOINT, json=data)
+#     if response.status_code == 200:
+#         return response.json()
+#     else:
+#         st.error(f"Failed to make API request. Status code: {response.status_code}")
+#         return None
 
 
 # Function to display numerical values
 def display_numerical_values(data, title):
     st.subheader(title)
     st.write(data)
+
+
+# Function to generate data points and make API requests
+def generate_data(start_year, start_month, category, type):
+    data_points = []
+
+    # Generate 20 data points before and after the given date
+    for i in range(-20, 21):
+        current_date = datetime(start_year, start_month, 1) + timedelta(days=i)
+        data_point = {'year': current_date.year, 'month': current_date.month, "category": category, "type": type}
+        data_point['Value'] = make_local_request(data_point)
+        data_point['Date'] = current_date
+        data_points.append(data_point)
+
+    # Create a DataFrame
+    df = pd.DataFrame(data_points)
+
+    return df
 
 
 # Function to generate line graph for historical values and forecasts
@@ -38,6 +57,9 @@ def main():
         page_icon=":car:",
         layout="centered",
     )
+
+
+###############################################################################################
 
     # Centered title
     st.markdown("""
@@ -63,6 +85,9 @@ def main():
          Check out what the data looks like and the performance of different models at **Models and Visualization**.
      """)
 
+
+#######################################################################################################################
+
     # Section 1: Enter "Year", "Month", "Category", "Type"
     st.header("Section 1: Explore Specifics")
     st.subheader("Uncover Insights with Customized Analysis")
@@ -72,21 +97,26 @@ def main():
     """)
     year = st.number_input("Enter Year", min_value=2000, max_value=2023, step=1)
     month = st.slider("Enter Month", 1, 12)
-    category = st.selectbox("Select Category", ["Category A", "Category B", "Category C"])
-    accident_type = st.selectbox("Select Type", ["Type 1", "Type 2", "Type 3"])
+    category = st.selectbox("Select Category", ["Alcohol Accidents", "Escape Accidents", "Traffic Accidents"])
+    accident_type = st.selectbox("Select Type", ["Total", "Injured and Killed", "With Personal Injury"])
 
     if st.button("Get Numerical Value and Line Graph"):
-        data = {"year": year, "month": month, "category": category, "type": accident_type}
-        result = make_api_request(data)
+        data = {"year": year, "month": month, "category": category.lower(), "type": accident_type.lower()}
+        result = make_local_request(data)
         if result:
             display_numerical_values(result, "Numerical Values")
 
-            # Generate line graph for historical values and forecasts
-            df = pd.DataFrame(result['historical_forecast_data'])
-            generate_line_graph(df, "Historical and Forecasted Values")
+            # df = generate_data(year, month, category, accident_type)
+            # # Generate line graph for historical values and forecasts
+            # generate_line_graph(df, "Historical and Forecasted Values")
+
+
+#######################################################################################
 
     # Headings for different prediction options
     st.header("Prediction Options")
+
+#######################################################################################
 
     # Section 2: Traffic Accidents
     st.subheader("Section 2: Traffic Accidents Analysis")
@@ -98,14 +128,26 @@ def main():
     section2_month = st.slider("Enter Traffic Accidents Month", 1, 12)
 
     if st.button("Get Traffic Accidents Numerical Values and Line Graph"):
-        section2_data = {"year": section2_year, "month": section2_month}
-        result = make_api_request(section2_data)
-        if result:
-            display_numerical_values(result, "Traffic Accidents Numerical Values")
-
+        section2_data_1 = {"year": section2_year, "month": section2_month,
+                           "category": "traffic accidents", "type": "total"}
+        section2_data_2 = {"year": section2_year, "month": section2_month,
+                           "category": "traffic accidents", "type": "injured and killed"}
+        section2_data_3 = {"year": section2_year, "month": section2_month,
+                           "category": "traffic accidents", "type": "with personal injury"}
+        result1 = make_local_request(section2_data_1)
+        result2 = make_local_request(section2_data_2)
+        result3 = make_local_request(section2_data_3)
+        if result1:
+            display_numerical_values(result1, "Traffic Accidents: Total")
+        if result2:
+            display_numerical_values(result2, "Traffic Accidents: Injured and Killed")
+        if result3:
+            display_numerical_values(result3, "Traffic Accidents: With Personal Injury")
             # Generate line graph for historical values and forecasts
-            df = pd.DataFrame(result['historical_forecast_data'])
-            generate_line_graph(df, "Traffic Accidents Historical and Forecasted Values")
+            # df = pd.DataFrame(result['historical_forecast_data'])
+            # generate_line_graph(df, "Traffic Accidents Historical and Forecasted Values")
+
+#######################################################################################
 
     # Section 3: Escape Accidents
     st.subheader("Section 3: Escape Accidents Unveiled")
@@ -117,14 +159,27 @@ def main():
     section3_month = st.slider("Enter Escape Accidents Month", 1, 12)
 
     if st.button("Get Escape Accidents Numerical Values and Line Graph"):
-        section3_data = {"year": section3_year, "month": section3_month}
-        result = make_api_request(section3_data)
-        if result:
-            display_numerical_values(result, "Escape Accidents Numerical Values")
+        section3_data_1 = {"year": section3_year, "month": section3_month,
+                           "category": "escape accidents", "type": "total"}
+        section3_data_2 = {"year": section3_year, "month": section3_month,
+                           "category": "escape accidents", "type": "injured and killed"}
+        section3_data_3 = {"year": section3_year, "month": section3_month,
+                           "category": "escape accidents", "type": "with personal injury"}
+        result1 = make_local_request(section3_data_1)
+        result2 = make_local_request(section3_data_2)
+        result3 = make_local_request(section3_data_3)
+        if result1:
+            display_numerical_values(result1, "Escape Accidents: Total")
+        if result2:
+            display_numerical_values(result2, "Escape Accidents: Injured and Killed")
+        if result3:
+            display_numerical_values(result3, "Escape Accidents: With Personal Injury")
 
             # Generate line graph for historical values and forecasts
-            df = pd.DataFrame(result['historical_forecast_data'])
-            generate_line_graph(df, "Escape Accidents Historical and Forecasted Values")
+            # df = pd.DataFrame(result['historical_forecast_data'])
+            # generate_line_graph(df, "Escape Accidents Historical and Forecasted Values")
+
+#######################################################################################
 
     # Section 4: Alcohol Accidents
     st.subheader("Section 4: Delving into Alcohol-Related Incidents")
@@ -136,26 +191,41 @@ def main():
     section4_month = st.slider("Enter Alcohol Accidents Month", 1, 12)
 
     if st.button("Get Alcohol Accidents Numerical Values and Line Graph"):
-        section4_data = {"year": section4_year, "month": section4_month}
-        result = make_api_request(section4_data)
-        if result:
-            display_numerical_values(result, "Alcohol Accidents Numerical Values")
+        section4_data_1 = {"year": section4_year, "month": section4_month,
+                           "category": "escape accidents", "type": "total"}
+        section4_data_2 = {"year": section4_year, "month": section4_month,
+                           "category": "escape accidents", "type": "injured and killed"}
+        section4_data_3 = {"year": section4_year, "month": section4_month,
+                           "category": "escape accidents", "type": "with personal injury"}
+        result1 = make_local_request(section4_data_1)
+        result2 = make_local_request(section4_data_2)
+        result3 = make_local_request(section4_data_3)
+        if result1:
+            display_numerical_values(result1, "Escape Accidents: Total")
+        if result2:
+            display_numerical_values(result2, "Escape Accidents: Injured and Killed")
+        if result3:
+            display_numerical_values(result3, "Escape Accidents: With Personal Injury")
 
-            # Generate line graph for historical values and forecasts
-            df = pd.DataFrame(result['historical_forecast_data'])
-            generate_line_graph(df, "Alcohol Accidents Historical and Forecasted Values")
+
+            # # Generate line graph for historical values and forecasts
+            # df = pd.DataFrame(result['historical_forecast_data'])
+            # generate_line_graph(df, "Alcohol Accidents Historical and Forecasted Values")
+
+#######################################################################################
 
     st.sidebar.title("Acknowledgment & Contributor")
     st.sidebar.write("""
         This app is part of the AI engineer task at Digital Product School.
 
-        **Contributor:** XYZ
-        - [LinkedIn](https://www.linkedin.com/in/xyz/)
-        - [Twitter](https://twitter.com/xyz/)
-        - [GitHub](https://github.com/xyz/)
-        - [CV](https://link-to-cv.com/)
+        **Created by:** Diksha Shrivastava
+        - [LinkedIn](https://www.linkedin.com/in/diksha-shrivastava-2aa3bb221/)
+        - [Twitter](https://twitter.com/Diksha1713)
+        - [GitHub](https://github.com/diksha-shrivastava13)
+        - [CV](https://drive.google.com/file/d/1W3QEudAk5WU-vojh3JEyvsUz0ut0wIKH/view?usp=sharing)
+        - [Website](http://diksha-shrivastava13.xyz/)
 
-        For more details, check out the [GitHub repository](https://github.com/xyz/dps-ai-engineer-task).
+        For more details, check out the [GitHub repository](https://github.com/diksha-shrivastava13/Traffic-Accidents-Model).
     """)
 
 
