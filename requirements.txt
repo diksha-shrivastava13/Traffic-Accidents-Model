@@ -1,0 +1,7 @@
+streamlit  # Replace VERSION with the actual version you are using
+requests
+pandas  # Replace VERSION with the actual version you are using
+datetime
+timedelta
+bentoml # Replace VERSION with the actual version you are using
+xgboost
