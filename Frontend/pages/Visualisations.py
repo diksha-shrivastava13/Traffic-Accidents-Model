@@ -10,9 +10,9 @@ def visualize_images(image_folder):
 
     # Image descriptions
     image_descriptions = [
-        """Image 1: Bar Plot Displaying the Different Characteristics of Accidents 
+        "Image 1: Line Plot of Change from Previous Month Percentage",
+        """Image 2: Bar Plot Displaying the Different Characteristics of Accidents 
         (Injured and Killed or Personal Injury or Total) for Each Category of Accident.""",
-        "Image 2: Line Plot of Change from Previous Month Percentage",
         "Image 3: Line Plot of Accidents Involving Alcohol Plotted Against Time",
         "Image 4: Line Plot of Each Category of Accidents (Traffic, Alcohol, or Escape) Plotted Against Time.",
         "Image 5: Line Plot of Escape Accidents Plotted Against Time",

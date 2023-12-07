@@ -10,26 +10,26 @@ def visualize_images(image_folder):
 
     # Image descriptions
     image_descriptions = [
-        "Image 1: ARIMA Auto-Correlation Plot",
-        "Image 2: ARIMA Partial Auto-Correlation Plot",
-        """Image 3: LightGBM Model | Root Mean Squared Error (RMSE): 178.9579 | R-squared (R2) Score: 0.9788""",
-        """Image 4: Linear Regression Model | Linear Regression RMSE: 652.3649192609317 | 
+        """Image 1: LightGBM Model | Root Mean Squared Error (RMSE): 178.9579 | R-squared (R2) Score: 0.9788""",
+        """Image 2: Multi-Layer Perceptron Model | Root Mean Squared Error (RMSE): 1228.6881 | 
+                R-squared (R2) Score: 0.0006""",
+        """Image 3: Poisson Regression Model | Root Mean Squared Error: 216.49672043877882 |
+                R-squared: 0.9689701932188256""",
+        "Image 4: Prophet Model for Alcohol Accidents",
+        "Image 5: Prophet Components of Alcohol Model",
+        "Image 6: SARIMAX Model",
+        """Image 7: XGBoost | Root Mean Squared Error (RMSE): 179.2515 |
+                R-squared (R2) Score: 0.9787""",
+        "Image 8: ARIMA Auto-Correlation Plot",
+        "Image 9: ARIMA Partial Auto-Correlation Plot",
+        """Image 10: Linear Regression Model | Linear Regression RMSE: 652.3649192609317 | 
         Linear Regression R2 Score: 0.7182540867105955""",
-        """Image 5: Multi-Layer Perceptron Model | Root Mean Squared Error (RMSE): 1228.6881 | 
-        R-squared (R2) Score: 0.0006""",
-        """Image 6: Poisson Regression Model | Root Mean Squared Error: 216.49672043877882 |
-        R-squared: 0.9689701932188256""",
-        "Image 7: Prophet Model for Alcohol Accidents",
-        "Image 8: Prophet Components of Alcohol Model",
-        "Image 9: Prophet Model for Escape Accidents",
-        "Image 10: Prophet Components of Escape Model",
-        "Image 11: Prophet Model for Traffic Accidents",
-        "Image 12: Prophet Components of Traffic Model",
-        "Image 13: SARIMAX Model",
-        "Image 14: AutoARIMA Using Sktime",
-        "Image 15: XGBRegressor for Time Series",
-        """Image 16: XGBoost | Root Mean Squared Error (RMSE): 179.2515 |
-        R-squared (R2) Score: 0.9787""",
+        "Image 11: Prophet Model for Escape Accidents",
+        "Image 12: Prophet Components of Escape Model",
+        "Image 13: Prophet Model for Traffic Accidents",
+        "Image 14: Prophet Components of Traffic Model",
+        "Image 15: AutoARIMA Using Sktime",
+        "Image 16: XGBRegressor for Time Series",
     ]
 
     image_files = sorted(os.listdir(image_folder))
