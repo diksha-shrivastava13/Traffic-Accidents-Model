@@ -1,6 +1,6 @@
-# Traffic-Accidents-Model
+# Munich-Accidents-Model
 
-Welcome to the repository for the Digital Product School's AI Engineering Challenge round. This repository contains all the code related to the development and deployment of a traffic accidents prediction model.
+Welcome to the repository for the Digital Product School's AI Engineering Challenge round. This repository contains all the code related to the development and deployment of an accidents prediction model.
 
 ## Deployment
 
